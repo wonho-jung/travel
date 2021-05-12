@@ -3,6 +3,8 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import { FaBars } from "react-icons/fa"
 import { menuData } from "../data/MenuData"
+import { Button } from "./Button"
+import video from "../assets/videos/video.mp4"
 const Header = () => {
   return (
     <Nav>
@@ -15,13 +17,18 @@ const Header = () => {
           </NavLink>
         ))}
       </NavMeun>
+      <NavBtn>
+        <Button primary="true" round="true" to="/trips">
+          Book a Flight
+        </Button>
+      </NavBtn>
     </Nav>
   )
 }
 
 export default Header
 const Nav = styled.nav`
-  background: red;
+  background: transparent;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -54,6 +61,14 @@ const NavMeun = styled.div`
   display: flex;
   align-items: center;
   margin-right: 10px;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`
+const NavBtn = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 24px;
   @media screen and (max-width: 768px) {
     display: none;
   }
