@@ -1,0 +1,26 @@
+[
+  {
+    "img": "../assets/images/image1.jpg",
+    "alt": "White Boats on Body of Water",
+    "name": "White Boats on Body of Water",
+    "button": "View Destination"
+  },
+  {
+    "img": "../assets/images/image2.jpg",
+    "alt": "Moraine Lake, Canada",
+    "name": "Moraine Lake, Canada",
+    "button": "View Destination"
+  },
+  {
+    "img": "../assets/images/image3.jpg",
+    "alt": "Aerial View of Mountain ",
+    "name": "Aerial View of Mountain",
+    "button": "View Destination"
+  },
+  {
+    "img": "../assets/images/image4.jpg",
+    "alt": "Photo of Santorini, Greece",
+    "name": "Photo of Santorini, Greece",
+    "button": "View Destination"
+  }
+]

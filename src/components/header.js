@@ -4,7 +4,6 @@ import styled from "styled-components"
 import { FaBars } from "react-icons/fa"
 import { menuData } from "../data/MenuData"
 import { Button } from "./Button"
-import video from "../assets/videos/video.mp4"
 const Header = () => {
   return (
     <Nav>
