@@ -2,7 +2,30 @@ import React from "react"
 import Img from "gatsby-image"
 import { IoMdCheckmarkCircleOutline } from "react-icons/io"
 import styled from "styled-components"
+import { graphql, useStaticQuery } from "gatsby"
+import { FaRegLightbulb } from "react-icons/fa"
 function Testimonials() {
+  const data = useStaticQuery(graphql`
+    query {
+      allFile(
+        filter: {
+          ext: { regex: "/(jpg)| (png) |(jpeg)/" }
+          name: { in: ["sandra", "kim"] }
+        }
+      ) {
+        edges {
+          node {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+  console.log(data)
   return (
     <TestimonialsContainer>
       <TopLine>Testimonials</TopLine>
@@ -10,8 +33,14 @@ function Testimonials() {
       <ContentWrapper>
         <ColumnOne>
           <Testimonial>
-            <IoMdCheckmarkCircleOutline />
-            <h3>Sean Michaels</h3>
+            <IoMdCheckmarkCircleOutline
+              css={`
+                color: #3fffa8;
+                font-size: 2rem;
+                margin-bottom: 1rem;
+              `}
+            />
+            <h3>Sandra</h3>
             <p>
               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
               illum aperiam, nesciunt doloremque suscipit incidunt eius rem?
@@ -20,7 +49,13 @@ function Testimonials() {
             </p>
           </Testimonial>
           <Testimonial>
-            <IoMdCheckmarkCircleOutline />
+            <FaRegLightbulb
+              css={`
+                color: #f9b19b;
+                font-size: 2rem;
+                margin-bottom: 1rem;
+              `}
+            />
             <h3>Sarah Kim</h3>
             <p>
               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
@@ -31,7 +66,9 @@ function Testimonials() {
           </Testimonial>
         </ColumnOne>
         <ColumnTwo>
-          <Images />
+          {data.allFile.edges.map((img, key) => (
+            <Images key={key} fluid={img.node.childImageSharp.fluid} />
+          ))}
         </ColumnTwo>
       </ContentWrapper>
     </TestimonialsContainer>
@@ -51,12 +88,10 @@ const TopLine = styled.div`
   color: #077bf1;
   font-size: 1rem;
   padding-left: 2rem;
-  margin-bottom: 4rem;
-  font-size: clamp(1.5rem, 5vw, 2rem);
-  font-weight: bold;
+  margin-bottom: 0.75rem;
 `
 const Description = styled.div`
-  text-align: center;
+  text-align: start;
   padding-left: 2rem;
   margin-bottom: 4rem;
   font-size: clamp(1.5rem, 5vw, 2rem);
@@ -65,12 +100,16 @@ const Description = styled.div`
 
 const ContentWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
+  padding: 0 2rem;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 const ColumnOne = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
 `
 
 const Testimonial = styled.div`
@@ -98,5 +137,5 @@ const ColumnTwo = styled.div`
 `
 const Images = styled(Img)`
   border-radius: 10px;
-  height: 100%;
+  height: 400px;
 `
