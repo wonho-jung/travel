@@ -13,7 +13,7 @@ function Hero() {
         <HeroItems>
           <Heroh1>Unreal Destinations</Heroh1>
           <Herop>Out of this world</Herop>
-          <Button primary="true" big="true" round="true" to="trips">
+          <Button primary="true" big="true" round="true" to="/#trips">
             Travel Now
           </Button>
         </HeroItems>

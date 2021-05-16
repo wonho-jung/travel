@@ -27,7 +27,7 @@ function Testimonials() {
   `)
   console.log(data)
   return (
-    <TestimonialsContainer>
+    <TestimonialsContainer id="about">
       <TopLine>Testimonials</TopLine>
       <Description>What People are Saying</Description>
       <ContentWrapper>

@@ -40,7 +40,6 @@ function Trips({ heading }) {
               <ProductTitle>{item.node.name}</ProductTitle>
             </TextWrap>
             <Button
-              to="/trips"
               primary="true"
               round="true"
               css={`
@@ -59,7 +58,7 @@ function Trips({ heading }) {
     return tripsArray
   }
   return (
-    <ProductsContainer>
+    <ProductsContainer id="trips">
       <ProductsHeading>{heading}</ProductsHeading>
       <ProductWrapper>{getTrips(data)}</ProductWrapper>
     </ProductsContainer>

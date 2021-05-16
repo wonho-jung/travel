@@ -4,7 +4,7 @@ import { StatsData } from "../data/StatsData"
 
 function Start() {
   return (
-    <StartContainer>
+    <StartContainer id="careers">
       <Heading>Why Choose Us?</Heading>
       <Wrapper>
         {StatsData.map((item, key) => (

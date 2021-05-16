@@ -4,11 +4,27 @@ import styled from "styled-components"
 import { FaBars } from "react-icons/fa"
 import { menuData } from "../data/MenuData"
 import { Button } from "./Button"
+import { MdCancel } from "react-icons/md"
 const Header = () => {
+  const [clicked, setClicked] = React.useState(false)
+  console.log(clicked)
   return (
     <Nav>
       <NavLink to="/">EXPLORIX</NavLink>
-      <Bars />
+      {!clicked ? (
+        <Bars onClick={() => setClicked(true)} />
+      ) : (
+        <>
+          <Cancel onClick={() => setClicked(false)} />
+          <Mobile className={clicked ? "nav-menu active" : "nav-menu"}>
+            {menuData.map((item, index) => (
+              <MobileLink key={index} to={item.link}>
+                {item.title}
+              </MobileLink>
+            ))}
+          </Mobile>
+        </>
+      )}
       <NavMeun>
         {menuData.map((item, index) => (
           <NavLink key={index} to={item.link}>
@@ -17,7 +33,7 @@ const Header = () => {
         ))}
       </NavMeun>
       <NavBtn>
-        <Button primary="true" round="true" to="/trips">
+        <Button primary="true" round="true" to="/#book">
           Book a Flight
         </Button>
       </NavBtn>
@@ -46,6 +62,8 @@ const NavLink = styled(Link)`
 const Bars = styled(FaBars)`
   display: none;
   color: #fff;
+  z-index: 100;
+
   @media screen and (max-width: 768px) {
     display: block;
     position: absolute;
@@ -56,6 +74,22 @@ const Bars = styled(FaBars)`
     cursor: pointer;
   }
 `
+const Cancel = styled(MdCancel)`
+  display: none;
+  color: #fff;
+  z-index: 100;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-100%, 75%);
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+`
+
 const NavMeun = styled.div`
   display: flex;
   align-items: center;
@@ -70,5 +104,27 @@ const NavBtn = styled.div`
   margin-right: 24px;
   @media screen and (max-width: 768px) {
     display: none;
+  }
+`
+const Mobile = styled.div`
+  -webkit-clip-path: circle(1200px at 90% -10%);
+  clip-path: circle(1200px at 90% -10%);
+  pointer-events: all;
+  background: #1e2a3a;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+`
+const MobileLink = styled(Link)`
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  :first-child {
+    padding-top: 5rem;
   }
 `

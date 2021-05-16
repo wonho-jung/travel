@@ -4,7 +4,7 @@ import { Button } from "./Button"
 import contact from "../assets/images/contact.jpg"
 function Email() {
   return (
-    <EmailContainer>
+    <EmailContainer id="book">
       <EmailContent>
         <h1>Get Access to Exclusive Offers</h1>
         <p>
