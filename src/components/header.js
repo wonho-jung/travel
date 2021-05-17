@@ -7,29 +7,34 @@ import { Button } from "./Button"
 import { MdCancel } from "react-icons/md"
 const Header = () => {
   const [clicked, setClicked] = React.useState(false)
-  console.log(clicked)
+  console.log(!clicked)
+  const handleClick = () => setClicked(!clicked)
+  const closeMenu = e => {
+    e.preventDefault()
+    setClicked(true)
+  }
   return (
     <Nav>
       <NavLink to="/">EXPLORIX</NavLink>
-      {!clicked ? (
-        <Bars onClick={() => setClicked(true)} />
+      {clicked ? (
+        <Cancel onClick={() => handleClick} />
       ) : (
-        <>
-          <Cancel onClick={() => setClicked(false)} />
-          <Mobile className={clicked ? "nav-menu active" : "nav-menu"}>
-            {menuData.map((item, index) => (
-              <MobileLink key={index} to={item.link}>
-                {item.title}
-              </MobileLink>
-            ))}
-          </Mobile>
-        </>
+        <Bars onClick={() => handleClick} />
       )}
-      <NavMeun>
+      <Mobile className={clicked ? "nav-menu active" : "nav-menu"}>
         {menuData.map((item, index) => (
-          <NavLink key={index} to={item.link}>
+          <MobileLink key={index} to={item.link}>
             {item.title}
-          </NavLink>
+          </MobileLink>
+        ))}
+      </Mobile>
+      <NavMeun onClick={closeMenu}>
+        {menuData.map((item, index) => (
+          <div>
+            <NavLink key={index} to={item.link}>
+              {item.title}
+            </NavLink>
+          </div>
         ))}
       </NavMeun>
       <NavBtn>
@@ -50,6 +55,26 @@ const Nav = styled.nav`
   padding: 0.5rem calc((100vw- 1300px) / 2);
   z-index: 100;
   position: relative;
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: #1e2a3a;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    -webkit-clip-path: circle(100px at 90% -60%);
+    clip-path: circle(100px at 90% -60%);
+    transition: all 1.5s ease-out;
+    pointer-events: none;
+  }
+  .nav-menu.active {
+    -webkit-clip-path: circle(1200px at 90% -10%);
+    clip-path: circle(1200px at 90% -10%);
+    pointer-events: all;
+    background: #1e2a3a;
+  }
 `
 const NavLink = styled(Link)`
   color: #fff;
@@ -77,9 +102,9 @@ const Bars = styled(FaBars)`
 const Cancel = styled(MdCancel)`
   display: none;
   color: #fff;
-  z-index: 100;
 
   @media screen and (max-width: 768px) {
+    z-index: 100;
     display: block;
     position: absolute;
     top: 0;
@@ -106,18 +131,7 @@ const NavBtn = styled.div`
     display: none;
   }
 `
-const Mobile = styled.div`
-  -webkit-clip-path: circle(1200px at 90% -10%);
-  clip-path: circle(1200px at 90% -10%);
-  pointer-events: all;
-  background: #1e2a3a;
-  z-index: 10;
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  width: 100%;
-`
+const Mobile = styled.div``
 const MobileLink = styled(Link)`
   color: #fff;
   display: flex;
