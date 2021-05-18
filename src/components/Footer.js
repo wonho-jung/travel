@@ -11,7 +11,7 @@ function Footer() {
         </FooterDesc>
         <FooterLinkItems>
           <FooterLinkTitle>Contact Us</FooterLinkTitle>
-          <FooterLink to="/about">Contact</FooterLink>
+          <FooterLink to="/">Contact</FooterLink>
           <FooterLink to="/">Support</FooterLink>
           <FooterLink to="/">Destinations</FooterLink>
           <FooterLink to="/">Sponsorships</FooterLink>
@@ -27,7 +27,7 @@ function Footer() {
         </FooterLinkItems>
         <FooterLinkItems>
           <FooterLinkTitle>Social Media</FooterLinkTitle>
-          <FooterLink to="/about">Instagram</FooterLink>
+          <FooterLink to="/">Instagram</FooterLink>
           <FooterLink to="/">Facebook</FooterLink>
           <FooterLink to="/">Youtube</FooterLink>
           <FooterLink to="/">Twitter</FooterLink>
