@@ -7,29 +7,35 @@ import { Button } from "./Button"
 import { MdCancel } from "react-icons/md"
 const Header = () => {
   const [clicked, setClicked] = React.useState(false)
-  const [navIcon, setNavIcon] = React.useState("white")
-  console.log(clicked)
+  const [navIcon, setNavIcon] = React.useState(false)
+  console.log(navIcon)
   const handleClick = () => setClicked(!clicked)
   const closeMenu = () => setClicked(false)
-
+  console.log(window.scrollY)
   const scroll = () => {
-    if (
-      document.body.scrollTop > 80 ||
-      document.documentElement.scrollTop > 80
-    ) {
-      setNavIcon("black")
+    if (window.scrollY > 753) {
+      setNavIcon(true)
     } else {
-      setNavIcon("#fff")
+      setNavIcon(false)
     }
   }
-  React.useEffect(() => {})
+  React.useEffect(() => {
+    window.addEventListener("scroll", scroll)
+    return () => window.removeEventListener("scroll", scroll)
+  }, [])
   return (
     <Nav>
       <NavLink to="/">EXPLORIX</NavLink>
       {clicked ? (
-        <Cancel onClick={handleClick} />
+        <Cancel
+          onClick={handleClick}
+          className={!navIcon ? "icon" : "icon active"}
+        />
       ) : (
-        <Bars onClick={handleClick} />
+        <Bars
+          onClick={handleClick}
+          className={!navIcon ? "icon" : "icon active"}
+        />
       )}
       <Mobile className={clicked ? "nav-menu active" : "nav-menu"}>
         {menuData.map((item, index) => (
@@ -84,7 +90,13 @@ const Nav = styled.nav`
     -webkit-clip-path: circle(1200px at 90% -10%);
     clip-path: circle(1200px at 50% -10%);
     pointer-events: all;
-    background: #769abe;
+    background: #f26a2e;
+  }
+  .icon {
+    color: white;
+  }
+  .icon.active {
+    color: black;
   }
 `
 const NavLink = styled(Link)`
@@ -97,7 +109,7 @@ const NavLink = styled(Link)`
 `
 const Bars = styled(FaBars)`
   display: none;
-  color: #fff;
+
   z-index: 100;
 
   @media screen and (max-width: 768px) {
