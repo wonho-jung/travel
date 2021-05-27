@@ -11,7 +11,6 @@ const Header = () => {
   console.log(navIcon)
   const handleClick = () => setClicked(!clicked)
   const closeMenu = () => setClicked(false)
-  console.log(window.scrollY)
   const scroll = () => {
     if (window.scrollY > 753) {
       setNavIcon(true)
